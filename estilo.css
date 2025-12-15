@@ -60,23 +60,41 @@ body {
 }
 
 
-#mensaje {
+.input_contenedor {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 60px;
     background-color: rgba(240, 248, 255, 0.726);
     border: 2px solid black;
-    border-radius: 5%;
-    width: 80%;
-    height: 60%;
+    border-radius: 999px;
+    padding: 0 60px 0 20px;
 }
 
 
+.input_contenedor textarea {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: transparent;
+    resize: none;
+    outline: none;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+
+
 #boton_enviar {
+    position: absolute;
+    right: 10px;
+    width: 40px;
+    height: 40px;
     background-image: url("WhatsApp Image 2025-12-07 at 1.47.35 PM.jpeg");
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
-    width: 90px;
-    height: 70px;
-    background-color: rgb(195, 248, 195);
-    border-color: rgb(255, 255, 255);
-    border-radius: 10%;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
 }

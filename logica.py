@@ -1,17 +1,18 @@
 def responder(mensaje):
-    mensaje = mensaje()
+    mensaje = mensaje.lower()
 
-    if "hola" or "Hola" in mensaje:
-        return "¡Hola! ¿En qué puedo ayudarte en agronomía?"
+    saludos = ["hola", "buenos dias", "buenas tardes", "buenas noches", "que tal"]
+    fertilizante = ["abono", "nutriente", "fertilizante"]
+    plaga = ["plagas", "insectos", "plaga"]
 
-    elif "maíz" or "maiz" in mensaje:
-        return "El maíz requiere buen nitrógeno y temperaturas mayores a 15°C para sembrar."
+    if any(palabra in mensaje for palabra in saludos):
+        return "Hola, ¿en qué puedo ayudarte?"
 
-    elif "fertilizante" in mensaje:
-        return "Los fertilizantes NPK son comunes. ¿Para qué cultivo lo necesitas?"
-    
-    elif "quien te creo?" in mensaje: 
-        return "La Lejandra y El terror de las milfs, alias el gavilanez"
+    elif any(palabra in mensaje for palabra in fertilizante):
+        return "Los fertilizantes aportan nutrientes al suelo y ayudan a la planta."
+
+    elif any(palabra in mensaje for palabra in plaga):
+        return "Primero se debe identificar qué tipo de insecto es."
 
     else:
-        return "Aún no tengo una respuesta para eso. ¿Puedes intentar de nuevo?"
+        return "Error, inténtelo después."
