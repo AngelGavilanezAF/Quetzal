@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QUETZAL</title>
+
+  <!-- CSS  -->
+  <link rel="stylesheet" href="estilo.css">
+</head>
+
+<body>
+
+  <div class="chat-container">
+
+    <div class="chat-header">
+      <div class="menu-icon" onclick="toggleMenu()">☰</div>
+
+      <h1>🌽 Quetzal</h1>
+
+      <div id="loginPlaceholder">
+        <button class="login-btn" onclick="mostrarLoginModal()">INICIAR SESIÓN</button>
+      </div>
+
+      <div class="perfil-menu" id="perfilMenu">
+        <button onclick="cerrarSesion()">Cerrar sesión</button>
+        <button onclick="mostrarLoginModal()">Cambiar de cuenta</button>
+      </div>
+    </div>
+
+    <div class="menu-options" id="menu">
+      <button onclick="alert('Abrir perfil')">Perfil</button>
+      <button onclick="alert('Ver historial')">Historial</button>
+    </div>
+
+    <div class="chat-message" id="welcomeMessage">
+      Tu asesor agrícola virtual
+    </div>
+
+    <div id="messages"></div>
+
+    <div class="chat-input">
+      <input
+        type="text"
+        id="messageInput"
+        placeholder="    Escribir un mensaje..."
+      >
+      <button class="send-btn" onclick="sendMessage()">
+        <img src="leaf-icon.png.jpeg" alt="Enviar">
+      </button>
+    </div>
+
+    <div class="plus-button" onclick="togglePlusOptions()">+</div>
+
+    <div class="plus-options" id="plusOptions">
+      <button onclick="alert('Lo sentimos, cámara no disponible')">📷 Cámara</button>
+      <button onclick="alert('Lo sentimos, galería no disponible')">🖼 Galería</button>
+    </div>
+
+  </div>
+
+  <!-- MODAL LOGIN -->
+  <div class="login-modal" id="loginModal" style="display:none;">
+    <div class="login-box">
+      <input type="text" id="nombreInput" placeholder="Nombre">
+      <input type="email" id="correoInput" placeholder="Correo">
+      <input type="date" id="fechaInput">
+      <button onclick="loginGoogle()">Iniciar sesión</button>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    const chatHistory = [];
+
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+    }
+
+    function mostrarLoginModal() {
+      document.getElementById("loginModal").style.display = "flex";
+    }
+
+    function loginGoogle() {
+      const nombre = document.getElementById("nombreInput").value.trim();
+      const correo = document.getElementById("correoInput").value.trim();
+      const fecha = document.getElementById("fechaInput").value.trim();
+
+      if (!nombre || !correo || !fecha) return;
+
+      document.getElementById("loginModal").style.display = "none";
+
+      const inicial = nombre.charAt(0).toUpperCase();
+      const contenedor = document.getElementById("loginPlaceholder");
+
+      contenedor.innerHTML = `
+        <div class="circle-letter" onclick="togglePerfilMenu()">
+          ${inicial}
+        </div>
+      `;
+    }
+
+    function togglePerfilMenu() {
+      const menu = document.getElementById("perfilMenu");
+      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+    }
+
+    function cerrarSesion() {
+      const contenedor = document.getElementById("loginPlaceholder");
+      contenedor.innerHTML = `
+        <button class="login-btn" onclick="mostrarLoginModal()">
+          INICIAR SESIÓN
+        </button>
+      `;
+      document.getElementById("perfilMenu").style.display = "none";
+    }
+
+    function togglePlusOptions() {
+      const plus = document.getElementById("plusOptions");
+      plus.style.display = plus.style.display === "flex" ? "none" : "flex";
+    }
+
+    async function sendMessage() {
+      const input = document.getElementById("messageInput");
+      const message = input.value.trim();
+
+      if (!message) return;
+
+      document.getElementById("welcomeMessage").classList.add("hidden");
+
+      addMessage(message, "user-msg");
+      chatHistory.push({ role: "user", content: message });
+      input.value = "";
+
+      try {
+        const response = await fetch("https://quetzal-2g11.onrender.com/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ messages: chatHistory })
+        });
+
+        const data = await response.json();
+        const reply = data.reply.replace(/\n/g, "\n\n");
+
+        addMessage(reply, "bot-msg");
+        chatHistory.push({ role: "assistant", content: reply });
+
+      } catch (error) {
+        addMessage("formulando tu respuesta....", "bot-msg");
+        console.error(error);
+      }
+    }
+
+    function addMessage(text, className) {
+      const chat = document.getElementById("messages");
+      const msgDiv = document.createElement("div");
+
+      msgDiv.className = `msg ${className}`;
+      msgDiv.textContent = text;
+
+      chat.appendChild(msgDiv);
+      chat.scrollTop = chat.scrollHeight;
+    }
+  </script>
+
+</body>
+</html>
