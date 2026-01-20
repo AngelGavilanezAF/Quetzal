@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Quetzal</title>
+    <link rel="stylesheet" href="diseño.css">
+</head>
+<body>
+
+<center>
+    <div id="chat-quetzal" class="contenedor-chat">
+
+        <header id="encabezado-chat" class="encabezado">
+            <h1 class="titulo-chat">🌽Quetzal🌽</h1>
+            <p class="estado-chat">En línea</p>
+        </header>
+
+        <main id="area-mensajes" class="mensajes">
+            
+            <div class="mensaje mensaje-recibido">
+                <span class="autor-mensaje">Quetzal:</span>
+                <p class="texto-mensaje">¡Hola! Bienvenido.</p>
+            </div>
+
+            <div class="mensaje mensaje-enviado">
+                <span class="autor-mensaje">Tú:</span>
+                <p class="texto-mensaje">Hola 👋</p>
+            </div>
+
+        </main>
+
+        <footer id="area-entrada" class="entrada">
+            <input 
+                type="text" 
+                id="campo-mensaje" 
+                class="input-mensaje" 
+                placeholder="Escribe un mensaje..."
+            >
+            <button id="boton-enviar" class="boton-enviar">
+                Enviar
+            </button>
+        </footer>
+
+    </div>
+
+</center>
+    <script src="union.js"></script>
+
+</body>
+</html>

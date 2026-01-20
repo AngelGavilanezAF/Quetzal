@@ -1,0 +1,129 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+    background-image: url("WhatsApp Image 2026-01-13 at 12.26.59 PM.jpeg"); /* ruta de la imagen */
+    background-size: cover;       /* cubre toda la pantalla */
+    background-position: center;  /* centra la imagen */
+    background-repeat: no-repeat; /* no se repite */
+    background-attachment: fixed; /* efecto elegante al hacer scroll */
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+
+.contenedor-chat {
+    width: 380px;
+    height: 600px;
+    background-color: #ffffff36;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+
+.encabezado {
+    background-color: #2e7d32;
+    color: #ffffff;
+    padding: 15px;
+    text-align: center;
+}
+
+.titulo-chat {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.estado-chat {
+    font-size: 13px;
+    color: #c8e6c9;
+}
+
+
+.mensajes {
+    flex: 1;
+    padding: 15px;
+    background-color: #eef5ea; 
+    
+    overflow-y: auto;
+}
+
+
+.mensaje {
+    margin-bottom: 12px;
+    max-width: 80%;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.autor-mensaje {
+    font-weight: bold;
+    font-size: 12px;
+    display: block;
+    margin-bottom: 4px;
+}
+
+
+.mensaje-recibido {
+    background-color: #dcedc8;
+    
+    color: #33691e;
+    align-self: flex-start;
+}
+
+
+.mensaje-enviado {
+    background-color: #a5d6a7; 
+    color: #1b5e20;
+    align-self: flex-end;
+    margin-left: auto;
+}
+
+
+.entrada {
+    display: flex;
+    padding: 10px;
+    background-color: #f1f8e9; 
+    border-top: 1px solid #c5e1a5;
+}
+
+.input-mensaje {
+    flex: 1;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid #9ccc65;
+    outline: none;
+    font-size: 14px;
+}
+
+.input-mensaje:focus {
+    border-color: #558b2f;
+}
+
+
+.boton-enviar {
+    margin-left: 8px;
+    padding: 8px 15px;
+    background-color: #558b2f; 
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.boton-enviar:hover {
+    background-color: #33691e;
+}
